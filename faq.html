@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - Kinetica.css</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Fira+Code&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="kinetica.css">
+</head>
+<body>
+    <canvas id="particleCanvas"></canvas>
+    <div class="bg-glow"></div>
+    <div class="bg-glow-2"></div>
+
+    <nav class="navbar">
+        <a href="index.html" class="nav-brand">Kinetica</a>
+        <button class="menu-toggle">
+            <span></span><span></span><span></span>
+        </button>
+        <div class="nav-links">
+            <a href="index.html">Playground</a>
+            <a href="components.html">Components</a>
+            <a href="docs.html">Docs</a>
+            <a href="faq.html" class="active">FAQ</a>
+        </div>
+    </nav>
+
+    <header class="page-header" data-animate="fadeInDown">
+        <h1 class="logo">Frequently Asked Questions</h1>
+        <p class="subtitle">Everything you need to know about Kinetica.css.</p>
+    </header>
+
+    <main>
+        <div class="prose">
+            <details class="faq-item" data-animate="fadeInUp">
+                <summary>Is Kinetica free to use?</summary>
+                <div class="faq-content">
+                    <p>Yes! Kinetica is completely open-source and free to use in both personal and commercial projects.</p>
+                </div>
+            </details>
+
+            <details class="faq-item" data-animate="fadeInUp">
+                <summary>Can I use this with React, Vue, or Angular?</summary>
+                <div class="faq-content">
+                    <p>Absolutely. Since Kinetica is a pure CSS library, it is framework-agnostic. You can simply add the class names dynamically in your React components (using <code>className</code>) or Vue templates just as you would with normal CSS.</p>
+                </div>
+            </details>
+
+            <details class="faq-item" data-animate="fadeInUp">
+                <summary>How do I trigger an animation on scroll?</summary>
+                <div class="faq-content">
+                    <p>Kinetica does not include JavaScript for scroll detection. However, you can easily pair it with a library like <strong>IntersectionObserver</strong> or <strong>AOS (Animate On Scroll)</strong>. Simply configure your observer to add the <code>animated</code> and animation name classes when the element comes into view.</p>
+                </div>
+            </details>
+
+            <details class="faq-item" data-animate="fadeInUp">
+                <summary>Is it bad for performance to use many animations?</summary>
+                <div class="faq-content">
+                    <p>All animations in Kinetica are built using `transform` and `opacity` properties, which are GPU-accelerated by modern browsers. This means they are highly performant. However, animating too many elements at once on a single page can still cause lag, especially on low-end mobile devices, so use them tastefully.</p>
+                </div>
+            </details>
+
+            <details class="faq-item" data-animate="fadeInUp">
+                <summary>How can I create my own custom timing?</summary>
+                <div class="faq-content">
+                    <p>You can override the CSS variables provided by Kinetica in your own stylesheet. For example, you can set <code>--kinetica-duration: 4s;</code> on a specific element to make its animation last 4 seconds.</p>
+                </div>
+            </details>
+        </div>
+    </main>
+
+    <script src="mobile-menu.js"></script>
+    <script src="particles.js"></script>
+    <script src="scroll-animate.js"></script>
+</body>
+</html>

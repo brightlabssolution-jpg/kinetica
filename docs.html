@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation - Kinetica.css</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Fira+Code&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="kinetica.css">
+</head>
+<body>
+    <canvas id="particleCanvas"></canvas>
+    <div class="bg-glow"></div>
+    <div class="bg-glow-2"></div>
+
+    <nav class="navbar">
+        <a href="index.html" class="nav-brand">Kinetica</a>
+        <button class="menu-toggle">
+            <span></span><span></span><span></span>
+        </button>
+        <div class="nav-links">
+            <a href="index.html">Playground</a>
+            <a href="components.html">Components</a>
+            <a href="docs.html" class="active">Docs</a>
+            <a href="faq.html">FAQ</a>
+        </div>
+    </nav>
+
+    <header class="page-header">
+        <h1 class="logo">How to Use</h1>
+        <p class="subtitle">Get up and running with Kinetica.css in seconds.</p>
+    </header>
+
+    <main>
+        <div class="prose">
+            <h2>1. Installation</h2>
+            <p>The easiest way to use Kinetica is by including it directly from a CDN. Add the following <code>&lt;link&gt;</code> tag to the <code>&lt;head&gt;</code> of your HTML document:</p>
+            <pre><code>&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/user/kinetica@1.0.0/kinetica.min.css"&gt;</code></pre>
+            <p>Alternatively, you can download the <code>kinetica.css</code> file from our GitHub repository and host it locally.</p>
+
+            <h2>2. Basic Usage</h2>
+            <p>To animate an element, you need to add two classes to it:</p>
+            <ol>
+                <li>The base <code>animated</code> class.</li>
+                <li>The name of the animation you want to apply (e.g., <code>fadeInUp</code>, <code>bounce</code>).</li>
+            </ol>
+            <pre><code>&lt;div class="animated fadeInUp"&gt;
+  Watch me animate!
+&lt;/div&gt;</code></pre>
+
+            <h2>3. Customization</h2>
+            <p>Kinetica uses CSS variables (Custom Properties) to allow easy global customization of animation timing.</p>
+            <pre><code>:root {
+  --kinetica-duration: 1s; /* Default duration */
+  --kinetica-delay: 1s;    /* Default delay */
+}</code></pre>
+            <p>You can override these variables in your own CSS to change the defaults globally or for specific elements.</p>
+
+            <h2>4. Utility Classes</h2>
+            <p>Kinetica provides several utility classes to control the speed and repetition of your animations.</p>
+            
+            <h3>Speed Control</h3>
+            <ul>
+                <li><code>faster</code>: 0.5s duration</li>
+                <li><code>fast</code>: 0.8s duration</li>
+                <li>(Default is 1s duration)</li>
+                <li><code>slow</code>: 2s duration</li>
+                <li><code>slower</code>: 3s duration</li>
+            </ul>
+            <pre><code>&lt;div class="animated bounce slow"&gt;&lt;/div&gt;</code></pre>
+
+            <h3>Delays & Iteration</h3>
+            <ul>
+                <li><code>infinite</code>: Loops the animation infinitely.</li>
+                <li><code>delay-1s</code>: Waits 1 second before starting.</li>
+                <li><code>delay-2s</code>: Waits 2 seconds before starting.</li>
+                <li><code>delay-3s</code>: Waits 3 seconds before starting.</li>
+            </ul>
+            <pre><code>&lt;div class="animated pulse infinite delay-2s"&gt;&lt;/div&gt;</code></pre>
+
+            <h2>5. Available Animations</h2>
+            <p>Kinetica includes a wide variety of animations grouped by category:</p>
+            <div class="animation-list">
+                <h3>Fade Animations</h3>
+                <p><code>fadeIn</code>, <code>fadeOut</code>, <code>fadeInUp</code>, <code>fadeInDown</code>, <code>fadeInLeft</code>, <code>fadeInRight</code>, <code>fadeOutUp</code>, <code>fadeOutDown</code></p>
+                
+                <h3>Bounce Animations</h3>
+                <p><code>bounce</code>, <code>bounceIn</code>, <code>bounceInUp</code></p>
+                
+                <h3>Slide Animations</h3>
+                <p><code>slideInUp</code>, <code>slideInDown</code>, <code>slideInLeft</code>, <code>slideInRight</code>, <code>slideOutLeft</code>, <code>slideOutRight</code></p>
+                
+                <h3>Zoom & Rotate Animations</h3>
+                <p><code>zoomIn</code>, <code>zoomOut</code>, <code>rotateIn</code>, <code>rotateOut</code></p>
+                
+                <h3>Special Animations</h3>
+                <p><code>jackInTheBox</code>, <code>rollIn</code>, <code>rollOut</code>, <code>hinge</code>, <code>flip</code>, <code>lightSpeedInRight</code></p>
+                
+                <h3>Attention Seekers</h3>
+                <p><code>pulse</code>, <code>heartBeat</code>, <code>swing</code>, <code>wobble</code>, <code>flash</code>, <code>shakeX</code></p>
+                
+                <h3>Elastic Animations</h3>
+                <p><code>rubberBand</code>, <code>jello</code>, <code>tada</code></p>
+                
+                <h3>Filter & Clip Animations</h3>
+                <p><code>blurIn</code>, <code>blurOut</code>, <code>colorShift</code>, <code>swipeRight</code>, <code>swipeLeft</code>, <code>revealUp</code></p>
+                
+                <h3>Flip 3D Extensions</h3>
+                <p><code>flipInX</code>, <code>flipInY</code></p>
+            </div>
+            
+            <h2>6. Components</h2>
+            <p>We provide drop-in JS modules that pair perfectly with Kinetica's animations.</p>
+            <ul>
+                <li><strong>Slider Component:</strong> A lightweight carousel. Include <code>kinetica-slider.js</code> and <code>kinetica-slider.css</code>, then use <code>data-anim-in</code> attributes on your slides.</li>
+                <li><strong>Particle Backgrounds:</strong> Include <code>particles.js</code> and instantiate a <code>new ParticleEngine()</code> on any canvas element to add a rich, interactive background.</li>
+            </ul>
+            <p>Check out the <a href="components.html">Components Page</a> for live demos and code snippets.</p>
+        </div>
+    </main>
+
+    <script src="mobile-menu.js"></script>
+    <script src="particles.js"></script>
+</body>
+</html>

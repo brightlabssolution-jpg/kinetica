@@ -1,0 +1,192 @@
+/* kinetica-slider.css */
+.kinetica-slider-container {
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: 12px;
+    background: rgba(30, 41, 59, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.kinetica-slides {
+    position: relative;
+    width: 100%;
+    height: 400px; /* Users should override this based on their needs */
+}
+
+.kinetica-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: white;
+    font-family: inherit;
+    text-align: center;
+    padding: 2rem;
+    box-sizing: border-box;
+}
+
+.kinetica-slide.active {
+    display: flex;
+}
+
+/* Slide Content Wrappers (optional, useful for animating text) */
+.kinetica-slide-content {
+    max-width: 80%;
+}
+
+/* Slider Controls */
+.kinetica-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: white;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s, transform 0.2s;
+    font-size: 1.2rem;
+}
+
+.kinetica-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.kinetica-prev {
+    left: 15px;
+}
+
+.kinetica-next {
+    right: 15px;
+}
+
+/* Slider Pagination Dots */
+.kinetica-dots {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 10;
+}
+
+.kinetica-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+}
+
+.kinetica-dot.active {
+    background: white;
+    transform: scale(1.2);
+}
+
+/* Progress Bar */
+.kinetica-progress-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: rgba(255,255,255,0.1);
+    z-index: 15;
+}
+.kinetica-progress-bar {
+    height: 100%;
+    width: 0%;
+    background: var(--accent, #60a5fa);
+    transform-origin: left;
+}
+
+/* Backgrounds for Parallax/Zoom */
+.kinetica-slide-bg {
+    position: absolute;
+    top: -10%; left: -10%;
+    width: 120%; height: 120%; /* Extra size for panning/zooming */
+    background-size: cover;
+    background-position: center;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* 3D Cube Mode */
+.kinetica-mode-cube {
+    perspective: 1200px;
+}
+.kinetica-mode-cube .kinetica-slides {
+    transform-style: preserve-3d;
+}
+.kinetica-mode-cube .kinetica-slide {
+    backface-visibility: hidden;
+}
+
+/* Parallax & Zoom Mode Shared Classes */
+.kinetica-mode-parallax .kinetica-slide,
+.kinetica-mode-zoom .kinetica-slide {
+    transition: transform 1s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 1s ease;
+}
+.kinetica-mode-parallax .kinetica-slide-bg,
+.kinetica-mode-zoom .kinetica-slide-bg {
+    transition: transform 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Zoom Mode Override */
+.kinetica-mode-zoom .kinetica-slide {
+    transform: none !important;
+}
+.kinetica-mode-zoom .mode-out-left,
+.kinetica-mode-zoom .mode-out-right {
+    opacity: 0;
+}
+.kinetica-mode-zoom .mode-in-right,
+.kinetica-mode-zoom .mode-in-left {
+    opacity: 0;
+}
+.kinetica-mode-zoom .mode-in-right.active,
+.kinetica-mode-zoom .mode-in-left.active {
+    opacity: 1;
+}
+.kinetica-mode-zoom .kinetica-slide-bg {
+    transform: scale(1);
+    transition: transform 10s linear;
+}
+.kinetica-mode-zoom .kinetica-slide.active .kinetica-slide-bg {
+    transform: scale(1.15);
+}
+
+/* Parallax Transitions */
+.kinetica-mode-parallax .mode-out-left { transform: translateX(-100%); }
+.kinetica-mode-parallax .mode-out-left .kinetica-slide-bg { transform: translateX(20%); }
+
+.kinetica-mode-parallax .mode-out-right { transform: translateX(100%); }
+.kinetica-mode-parallax .mode-out-right .kinetica-slide-bg { transform: translateX(-20%); }
+
+.kinetica-mode-parallax .mode-in-right { transform: translateX(100%); }
+.kinetica-mode-parallax .mode-in-right .kinetica-slide-bg { transform: translateX(-20%); }
+.kinetica-mode-parallax .mode-in-right.active { transform: translateX(0); }
+.kinetica-mode-parallax .mode-in-right.active .kinetica-slide-bg { transform: translateX(0); }
+
+.kinetica-mode-parallax .mode-in-left { transform: translateX(-100%); }
+.kinetica-mode-parallax .mode-in-left .kinetica-slide-bg { transform: translateX(20%); }
+.kinetica-mode-parallax .mode-in-left.active { transform: translateX(0); }
+.kinetica-mode-parallax .mode-in-left.active .kinetica-slide-bg { transform: translateX(0); }

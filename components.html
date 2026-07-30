@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Components - Kinetica.css</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Fira+Code&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="kinetica.css">
+    <link rel="stylesheet" href="kinetica-slider.css">
+    <style>
+        .tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--glass-border);
+            padding-bottom: 1rem;
+            justify-content: center;
+        }
+        .tab-btn {
+            background: transparent;
+            color: #94a3b8;
+            border: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            transition: color 0.3s;
+        }
+        .tab-btn.active, .tab-btn:hover {
+            color: var(--accent);
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+
+        .slider-demo-container {
+            margin: 2rem 0;
+        }
+        /* Color the slides for demo purposes */
+        .kinetica-slide:nth-child(1) { background: linear-gradient(135deg, #60a5fa, #c084fc); }
+        .kinetica-slide:nth-child(2) { background: linear-gradient(135deg, #34d399, #3b82f6); }
+        .kinetica-slide:nth-child(3) { background: linear-gradient(135deg, #fbbf24, #f43f5e); }
+        
+        .particle-demo {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            border-radius: 12px;
+            background: #0f172a;
+            border: 1px solid var(--glass-border);
+            overflow: hidden;
+            margin: 2rem 0;
+        }
+        .particle-demo canvas {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+        }
+    </style>
+    <script>
+        // Disable global background particles on this page so we can focus on component demos
+        window.disableGlobalParticles = true;
+    </script>
+</head>
+<body class="is-components-page">
+    <div class="bg-glow"></div>
+    <div class="bg-glow-2"></div>
+
+    <nav class="navbar">
+        <a href="index.html" class="nav-brand">Kinetica</a>
+        <button class="menu-toggle">
+            <span></span><span></span><span></span>
+        </button>
+        <div class="nav-links">
+            <a href="index.html">Playground</a>
+            <a href="components.html" class="active">Components</a>
+            <a href="docs.html">Docs</a>
+            <a href="faq.html">FAQ</a>
+        </div>
+    </nav>
+
+    <header class="page-header" data-animate="fadeInDown">
+        <h1 class="logo">Components</h1>
+        <p class="subtitle">Drop-in scripts powered by Kinetica.</p>
+    </header>
+
+    <main>
+        <div class="prose" data-animate="fadeInUp">
+            
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="sliders">Kinetica Sliders</button>
+                <button class="tab-btn" data-tab="particles">Particle Backgrounds</button>
+            </div>
+
+            <!-- SLIDERS TAB -->
+            <div id="sliders" class="tab-content active">
+                <p>A lightweight, dependency-free slider module that uses Kinetica animations for slide transitions.</p>
+                
+                <h3>1. Auto-Play & Progress</h3>
+                <div class="slider-demo-container">
+                    <div class="kinetica-slider-container" id="sliderProgress">
+                        <div class="kinetica-slides">
+                            <div class="kinetica-slide" data-anim-in="fadeInRight" data-anim-out="fadeOutLeft">
+                                <h3>Slide 1</h3><p>Hover to Pause</p>
+                            </div>
+                            <div class="kinetica-slide" data-anim-in="fadeInRight" data-anim-out="fadeOutLeft">
+                                <h3>Slide 2</h3><p>Progress Bar Below</p>
+                            </div>
+                            <div class="kinetica-slide" data-anim-in="fadeInRight" data-anim-out="fadeOutLeft">
+                                <h3>Slide 3</h3><p>Resumes when mouse leaves</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <pre><code>new KineticaSlider('#sliderProgress', {
+    autoPlay: true,
+    autoPlayInterval: 4000,
+    showProgress: true,
+    pauseOnHover: true
+});</code></pre>
+
+                <h3>2. Parallax Mode</h3>
+                <div class="slider-demo-container">
+                    <div class="kinetica-slider-container" id="sliderParallax">
+                        <div class="kinetica-slides">
+                            <div class="kinetica-slide" data-bg="https://images.unsplash.com/photo-1518098268026-4e89f1a2cd8e?q=80&w=1000&auto=format&fit=crop">
+                                <h3 style="text-shadow: 0 2px 10px rgba(0,0,0,0.5);">Mountains</h3>
+                            </div>
+                            <div class="kinetica-slide" data-bg="https://images.unsplash.com/photo-1472214103451-9374bd1c798e?q=80&w=1000&auto=format&fit=crop">
+                                <h3 style="text-shadow: 0 2px 10px rgba(0,0,0,0.5);">Forest</h3>
+                            </div>
+                            <div class="kinetica-slide" data-bg="https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?q=80&w=1000&auto=format&fit=crop">
+                                <h3 style="text-shadow: 0 2px 10px rgba(0,0,0,0.5);">Ocean</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <pre><code>new KineticaSlider('#sliderParallax', {
+    mode: 'parallax',
+    autoPlay: false
+});</code></pre>
+
+                <h3>3. 3D Cube Mode</h3>
+                <div class="slider-demo-container">
+                    <div class="kinetica-slider-container" id="sliderCube">
+                        <div class="kinetica-slides">
+                            <div class="kinetica-slide">
+                                <h3>Face 1</h3><p>3D Space</p>
+                            </div>
+                            <div class="kinetica-slide">
+                                <h3>Face 2</h3><p>Preserves Depth</p>
+                            </div>
+                            <div class="kinetica-slide">
+                                <h3>Face 3</h3><p>True Cube</p>
+                            </div>
+                            <div class="kinetica-slide">
+                                <h3>Face 4</h3><p>Rotation</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <pre><code>new KineticaSlider('#sliderCube', {
+    mode: 'cube',
+    autoPlay: false
+});</code></pre>
+
+                <h3>4. Deep Zoom Mode</h3>
+                <div class="slider-demo-container">
+                    <div class="kinetica-slider-container" id="sliderZoom">
+                        <div class="kinetica-slides">
+                            <div class="kinetica-slide" data-bg="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1000&auto=format&fit=crop">
+                                <h3 style="text-shadow: 0 2px 10px rgba(0,0,0,0.5);">Abstract 1</h3>
+                            </div>
+                            <div class="kinetica-slide" data-bg="https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=1000&auto=format&fit=crop">
+                                <h3 style="text-shadow: 0 2px 10px rgba(0,0,0,0.5);">Abstract 2</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <pre><code>new KineticaSlider('#sliderZoom', {
+    mode: 'zoom',
+    autoPlay: true,
+    autoPlayInterval: 5000,
+    showProgress: true
+});</code></pre>
+
+                <h3>5. Basic Fade Transition (No Auto Play)</h3>
+                <div class="slider-demo-container">
+                    <div class="kinetica-slider-container" id="sliderFade">
+                        <div class="kinetica-slides">
+                            <div class="kinetica-slide" data-anim-in="fadeIn" data-anim-out="fadeOut">
+                                <h3>Slide 1</h3><p>Manual Navigation</p>
+                            </div>
+                            <div class="kinetica-slide" data-anim-in="fadeIn" data-anim-out="fadeOut">
+                                <h3>Slide 2</h3><p>Manual Navigation</p>
+                            </div>
+                            <div class="kinetica-slide" data-anim-in="fadeIn" data-anim-out="fadeOut">
+                                <h3>Slide 3</h3><p>Manual Navigation</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <pre><code>new KineticaSlider('#sliderFade', {
+    autoPlay: false,
+    animationIn: 'fadeIn',
+    animationOut: 'fadeOut'
+});</code></pre>
+
+                <h3>6. Basic Slide Transition (Auto Play)</h3>
+                <div class="slider-demo-container">
+                    <div class="kinetica-slider-container" id="sliderSlide">
+                        <div class="kinetica-slides">
+                            <div class="kinetica-slide" data-anim-in="slideInRight" data-anim-out="slideOutLeft">
+                                <h3>Slide 1</h3><p>Auto Playing</p>
+                            </div>
+                            <div class="kinetica-slide" data-anim-in="slideInRight" data-anim-out="slideOutLeft">
+                                <h3>Slide 2</h3><p>Auto Playing</p>
+                            </div>
+                            <div class="kinetica-slide" data-anim-in="slideInRight" data-anim-out="slideOutLeft">
+                                <h3>Slide 3</h3><p>Auto Playing</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <pre><code>new KineticaSlider('#sliderSlide', {
+    autoPlay: true,
+    autoPlayInterval: 3000,
+    showProgress: false
+});</code></pre>
+
+                <h3>7. 3D Flip Transition</h3>
+                <div class="slider-demo-container">
+                    <div class="kinetica-slider-container" id="sliderFlip">
+                        <div class="kinetica-slides">
+                            <div class="kinetica-slide" data-anim-in="flipInX" data-anim-out="fadeOut">
+                                <h3>Slide 1</h3><p>3D Flip In</p>
+                            </div>
+                            <div class="kinetica-slide" data-anim-in="flipInY" data-anim-out="fadeOut">
+                                <h3>Slide 2</h3><p>3D Flip In</p>
+                            </div>
+                            <div class="kinetica-slide" data-anim-in="flipInX" data-anim-out="fadeOut">
+                                <h3>Slide 3</h3><p>3D Flip In</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <pre><code>new KineticaSlider('#sliderFlip', {
+    autoPlay: true,
+    autoPlayInterval: 4500
+});</code></pre>
+            </div>
+
+            <!-- PARTICLES TAB -->
+            <div id="particles" class="tab-content">
+                <p>Add dynamic, interactive particle backgrounds to any element or the whole page.</p>
+
+                <h3>Interactive: Bursting Bubbles (Hover to Pop)</h3>
+                <div class="particle-demo" id="demoContainerBurst">
+                    <canvas id="canvasBurst"></canvas>
+                </div>
+                <pre><code>new ParticleEngine('canvasBurst', {
+    particleColor: 'rgba(96, 165, 250, 0.6)',
+    lineColor: '0, 0, 0', // No lines
+    particleCount: 40,
+    maxDistance: 0,
+    sizeMultiplier: 6,
+    speedMultiplier: 0.5,
+    interactiveMode: 'burst',
+    interactionRadius: 80
+});</code></pre>
+
+                <h3>Interactive: Repulsive Network (Hover to Push)</h3>
+                <div class="particle-demo" id="demoContainerRepulse">
+                    <canvas id="canvasRepulse"></canvas>
+                </div>
+                <pre><code>new ParticleEngine('canvasRepulse', {
+    particleColor: 'rgba(239, 68, 68, 0.8)',
+    lineColor: '239, 68, 68',
+    particleCount: 120,
+    maxDistance: 100,
+    speedMultiplier: 1.5,
+    interactiveMode: 'repulse',
+    interactionRadius: 100
+});</code></pre>
+
+                <h3>Interactive: Magnetic Grab (Hover to Connect)</h3>
+                <div class="particle-demo" id="demoContainerGrab">
+                    <canvas id="canvasGrab"></canvas>
+                </div>
+                <pre><code>new ParticleEngine('canvasGrab', {
+    particleColor: 'rgba(16, 185, 129, 0.8)',
+    lineColor: '16, 185, 129',
+    particleCount: 80,
+    maxDistance: 120,
+    speedMultiplier: 0.8,
+    interactiveMode: 'grab',
+    interactionRadius: 180
+});</code></pre>
+                
+                <hr style="margin: 40px 0; border: 1px solid rgba(255,255,255,0.1);">
+                <h3>Fast Red Particles</h3>
+                <div class="particle-demo" id="demoContainer1">
+                    <canvas id="canvasFastRed"></canvas>
+                </div>
+                
+                <pre><code>new ParticleEngine('canvasFastRed', {
+    particleColor: 'rgba(239, 68, 68, 0.8)', // Red
+    lineColor: '239, 68, 68',
+    particleCount: 150,
+    maxDistance: 80,
+    speedMultiplier: 2.5
+});</code></pre>
+
+                <h3>Slow Emerald Particles</h3>
+                <div class="particle-demo" id="demoContainer2">
+                    <canvas id="canvasSlowGreen"></canvas>
+                </div>
+
+                <pre><code>new ParticleEngine('canvasSlowGreen', {
+    particleColor: 'rgba(16, 185, 129, 0.5)', // Emerald
+    lineColor: '16, 185, 129',
+    particleCount: 50,
+    maxDistance: 200,
+    sizeMultiplier: 3,
+    speedMultiplier: 0.2
+});</code></pre>
+
+                <h3>Constellation Network</h3>
+                <div class="particle-demo" id="demoContainer3">
+                    <canvas id="canvasConstellation"></canvas>
+                </div>
+                <pre><code>new ParticleEngine('canvasConstellation', {
+    particleColor: 'rgba(255, 255, 255, 0.8)',
+    lineColor: '255, 255, 255',
+    particleCount: 120,
+    maxDistance: 250,
+    sizeMultiplier: 0.5,
+    speedMultiplier: 0.4
+});</code></pre>
+
+                <h3>Floating Orbs</h3>
+                <div class="particle-demo" id="demoContainer4">
+                    <canvas id="canvasOrbs"></canvas>
+                </div>
+                <pre><code>new ParticleEngine('canvasOrbs', {
+    particleColor: 'rgba(139, 92, 246, 0.3)', // Purple
+    lineColor: '0, 0, 0', // Lines won't matter with 0 maxDistance
+    particleCount: 40,
+    maxDistance: 0,
+    sizeMultiplier: 8,
+    speedMultiplier: 0.3
+});</code></pre>
+            </div>
+
+        </div>
+    </main>
+
+    <script src="mobile-menu.js"></script>
+    <script src="particles.js"></script>
+    <script src="kinetica-slider.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Tab Logic
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    tabBtns.forEach(b => b.classList.remove('active'));
+                    tabContents.forEach(c => c.classList.remove('active'));
+                    
+                    btn.classList.add('active');
+                    document.getElementById(btn.dataset.tab).classList.add('active');
+                });
+            });
+
+            // Init Sliders
+            new KineticaSlider('#sliderProgress', {
+                autoPlay: true,
+                autoPlayInterval: 4000,
+                showProgress: true,
+                pauseOnHover: true
+            });
+
+            new KineticaSlider('#sliderParallax', {
+                mode: 'parallax',
+                autoPlay: false
+            });
+
+            new KineticaSlider('#sliderCube', {
+                mode: 'cube',
+                autoPlay: false
+            });
+
+            new KineticaSlider('#sliderZoom', {
+                mode: 'zoom',
+                autoPlay: true,
+                autoPlayInterval: 5000,
+                showProgress: true
+            });
+
+            new KineticaSlider('#sliderFade', {
+                autoPlay: false,
+                animationIn: 'fadeIn',
+                animationOut: 'fadeOut'
+            });
+
+            new KineticaSlider('#sliderSlide', {
+                autoPlay: true,
+                autoPlayInterval: 3000,
+                showProgress: false
+            });
+
+            new KineticaSlider('#sliderFlip', {
+                autoPlay: true,
+                autoPlayInterval: 4500
+            });
+
+            // Init Particle Demos
+            
+            // Interactive Particles
+            new ParticleEngine('canvasBurst', {
+                particleColor: 'rgba(96, 165, 250, 0.6)',
+                lineColor: '0, 0, 0',
+                particleCount: 40,
+                maxDistance: 0,
+                sizeMultiplier: 6,
+                speedMultiplier: 0.5,
+                interactiveMode: 'burst',
+                interactionRadius: 80
+            });
+
+            new ParticleEngine('canvasRepulse', {
+                particleColor: 'rgba(239, 68, 68, 0.8)',
+                lineColor: '239, 68, 68',
+                particleCount: 120,
+                maxDistance: 100,
+                speedMultiplier: 1.5,
+                interactiveMode: 'repulse',
+                interactionRadius: 100
+            });
+
+            new ParticleEngine('canvasGrab', {
+                particleColor: 'rgba(16, 185, 129, 0.8)',
+                lineColor: '16, 185, 129',
+                particleCount: 80,
+                maxDistance: 120,
+                speedMultiplier: 0.8,
+                interactiveMode: 'grab',
+                interactionRadius: 180
+            });
+
+            // Standard Particles
+            new ParticleEngine('canvasFastRed', {
+                particleColor: 'rgba(239, 68, 68, 0.8)',
+                lineColor: '239, 68, 68',
+                particleCount: 150,
+                maxDistance: 80,
+                speedMultiplier: 2.5
+            });
+
+            new ParticleEngine('canvasSlowGreen', {
+                particleColor: 'rgba(16, 185, 129, 0.5)',
+                lineColor: '16, 185, 129',
+                particleCount: 50,
+                maxDistance: 200,
+                sizeMultiplier: 3,
+                speedMultiplier: 0.2
+            });
+
+            new ParticleEngine('canvasConstellation', {
+                particleColor: 'rgba(255, 255, 255, 0.8)',
+                lineColor: '255, 255, 255',
+                particleCount: 120,
+                maxDistance: 250,
+                sizeMultiplier: 0.5,
+                speedMultiplier: 0.4
+            });
+
+            new ParticleEngine('canvasOrbs', {
+                particleColor: 'rgba(139, 92, 246, 0.3)',
+                lineColor: '0, 0, 0',
+                particleCount: 40,
+                maxDistance: 0,
+                sizeMultiplier: 8,
+                speedMultiplier: 0.3
+            });
+        });
+    </script>
+</body>
+</html>
